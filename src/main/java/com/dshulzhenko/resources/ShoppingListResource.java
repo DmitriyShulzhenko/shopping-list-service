@@ -24,6 +24,7 @@ public class ShoppingListResource {
         this.counter = new AtomicLong();
     }
 
+    
     @GET
     @Timed
     public Saying sayHello(@QueryParam("name") Optional<String> name) {

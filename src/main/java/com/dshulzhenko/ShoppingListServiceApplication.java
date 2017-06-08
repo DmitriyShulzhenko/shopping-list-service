@@ -1,5 +1,11 @@
 package com.dshulzhenko;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+import org.h2.tools.DeleteDbFiles;
+
 import com.dshulzhenko.resources.ShoppingListResource;
 
 import io.dropwizard.Application;
@@ -20,6 +26,7 @@ public class ShoppingListServiceApplication extends Application<ShoppingListServ
     @Override
     public void initialize(final Bootstrap<ShoppingListServiceConfiguration> bootstrap) {
         // TODO: application initialization
+    	
     }
 
     @Override
@@ -27,6 +34,15 @@ public class ShoppingListServiceApplication extends Application<ShoppingListServ
                     final Environment environment) {
     	final ShoppingListResource resource = new ShoppingListResource();
     	environment.jersey().register(resource);
+    	
+    	DeleteDbFiles.execute("~", "test", true);
+    	Class.forName("org.h2.Driver");
+        Connection conn = DriverManager.
+            getConnection("jdbc:h2:~/test", "sa", "");
+        // add application code here
+        Statement stmt = conn.createStatement();
+        stmt.execute("CREATE TABLE PERSON(id int primary key, name varchar(255))");
+        conn.close();
     }
 
 }
