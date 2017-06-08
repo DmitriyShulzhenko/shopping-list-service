@@ -25,11 +25,8 @@ public class ShoppingListServiceApplication extends Application<ShoppingListServ
     @Override
     public void run(final ShoppingListServiceConfiguration configuration,
                     final Environment environment) {
-    	final ShoppingListResource resource = new ShoppingListResource(
-    	        configuration.getTemplate(),
-    	        configuration.getDefaultName()
-    	    );
-    	    environment.jersey().register(resource);
+    	final ShoppingListResource resource = new ShoppingListResource();
+    	environment.jersey().register(resource);
     }
 
 }

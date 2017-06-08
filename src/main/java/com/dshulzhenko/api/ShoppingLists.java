@@ -1,47 +1,45 @@
 package com.dshulzhenko.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingLists {
-	private HashMap<String,ShoppingList> shoppingLists = new HashMap<String,ShoppingList>();
-	
-	public ShoppingLists() {}
+	private String token;	
+	private Map<String,ArrayList<ShoppingItem>> shoppingLists = new HashMap<String,ArrayList<ShoppingItem>>();
 
-	public HashMap<String, ShoppingList> getShoppingLists() {
+	public ShoppingLists() {
+		
+	}
+	
+	public ShoppingLists(String token, Map<String, ArrayList<ShoppingItem>> shoppingLists) {
+		super();
+		this.token = token;
+		this.shoppingLists = shoppingLists;
+	}
+	
+	@JsonProperty
+	public String getToken() {
+		return token;
+	}
+
+	@JsonProperty
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	@JsonProperty
+	public Map<String, ArrayList<ShoppingItem>> getShoppingLists() {
 		return shoppingLists;
 	}
 
-	public void setShoppingLists(HashMap<String, ShoppingList> shoppingLists) {
+	@JsonProperty
+	public void setShoppingLists(Map<String, ArrayList<ShoppingItem>> shoppingLists) {
 		this.shoppingLists = shoppingLists;
 	}
-
-	@Override
-	public String toString() {
-		return "ShoppingLists [shoppingLists=" + shoppingLists + "]";
-	}
 	
-	public ShoppingList getShoppingList(String listName){
-		return shoppingLists.get(listName);
-	}
 	
-	public void addShoppingList (String listName){
-		shoppingLists.put(listName, new ShoppingList());
-	}
 	
-	public void removeShoppingList (String listName){
-		shoppingLists.remove(listName);
-	}
-	
-	public void addShoppingItem (String listName, ShoppingItem item){
-		shoppingLists.get(listName).addItem(item);
-	}
-	
-	public void removeShoppingItem (String listName, ShoppingItem item){
-		shoppingLists.get(listName).removeItem(item);
-	}
-	
-	public boolean containsKey (String listName){
-		return shoppingLists.containsKey(listName);
-	}
 }
 
